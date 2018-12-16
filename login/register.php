@@ -101,6 +101,7 @@
                 </button>
             </div>
             <br>
+            <a href="../php/guestLogin.php"><p class="information">Als Gast anmelden</p></a>
         </div>
     </div>
 </div>

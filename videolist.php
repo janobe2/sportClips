@@ -16,7 +16,6 @@
     <link href="css/3-col-portfolio.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -28,7 +27,7 @@
 
         session_start();
 
-        if (isset($_SESSION["username"]))
+        if (isset($_SESSION["username"]) && $_SESSION["rights"] != "GUEST")
             echo '<a class="navbar-brand" href="account.php">' . $_SESSION["username"] . '</a>';
         else {
             header("Location: login/login.php");
@@ -41,29 +40,20 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <?php
-
-        echo '
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Übersicht
-                    <span class="sr-only">(current)</span></a>
-                </li>';
-
-        if ($_SESSION["rights"] != "GUEST") {
-            echo '
                 <li class="nav-item">
-                    <a class="nav-link" href="videolist.php">Videoliste</a>
-                </li>';
-        }
-        echo '<li class="nav-item">
-                    <a class="nav-link" href="account.php">Account
-                        </a>
+                    <a class="nav-link" href="index.php">Übersicht</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="">Videoliste
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="account.php">Account</a>
                 </li>
             </ul>
-        </div>';
-        ?>
+        </div>
     </div>
     <button class="logout" onclick="window.location.href='php/logout.php';">Ausloggen</button>
 </nav>

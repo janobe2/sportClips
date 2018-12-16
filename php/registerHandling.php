@@ -40,8 +40,14 @@ if (isset($_POST["name"])) {
 
     //register new person
     $db->exec("INSERT INTO TUser (id, name, loginName, email, password, rights) 
-VALUES (null,'" . $name . "','" . $username . "','" . $email . "','" . $password . "','GUEST')");
+VALUES (null,'" . $name . "','" . $username . "','" . $email . "','" . $password . "','STUDENT')");
 
+
+    //Save all variables in Session
+    $_SESSION["name"] = $name;
+    $_SESSION["username"] = $username;
+    $_SESSION["email"] = $email;
+    $_SESSION["rights"] = "STUDENT";
 
     //head to index.php
     header("Location: ../index.php");

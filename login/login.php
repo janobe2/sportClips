@@ -32,7 +32,7 @@
 <div class="limiter">
     <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
         <div class="wrap-login100">
-            <form class="login100-form validate-form">
+            <form class="login100-form validate-form" action="../php/loginHandling.php" method="post">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
@@ -45,10 +45,11 @@
 
                 session_start();
 
-                if(isset($_SESSION["errorMessage"])){
-                    echo "<p id='loginError' class='error'>". $_SESSION["errorMessage"]."</p>";
+                if (isset($_SESSION["errorMessage"])) {
+                    echo "<p id='loginError' class='error'>" . $_SESSION["errorMessage"] . "</p>";
                 }
 
+                session_destroy();
                 ?>
 
                 <div class="wrap-input100 validate-input" data-validate="Anmeldename eingeben">
@@ -75,6 +76,7 @@
                 </button>
             </div>
             <br>
+            <a href="../php/guestLogin.php"><p class="information">Als Gast anmelden</p></a>
         </div>
     </div>
 </div>

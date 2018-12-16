@@ -46,9 +46,8 @@
         echo '
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Übersicht
-                    <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Übersicht</a>
                 </li>';
 
         if ($_SESSION["rights"] != "GUEST") {
@@ -57,9 +56,9 @@
                     <a class="nav-link" href="videolist.php">Videoliste</a>
                 </li>';
         }
-        echo '<li class="nav-item">
-                    <a class="nav-link" href="account.php">Account
-                        </a>
+        echo '<li class="nav-item active">
+                    <a class="nav-link" href="#">Account
+                        <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>';
