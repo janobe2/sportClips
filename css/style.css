@@ -1,6 +1,24 @@
 .logout{
     background-color: #f4511e;
     border: none;
+color: white;
+padding: 4px 8px;
+text-align: center;
+font-size: 16px;
+margin: 4px 2px;
+opacity: 0.6;
+transition: 0.3s;
+display: inline-block;
+text-decoration: none;
+cursor: pointer;
+float: right;
+}
+.logout:hover {opacity: 1}
+
+
+.add{
+    background-color: forestgreen;
+    border: none;
     color: white;
     padding: 4px 8px;
     text-align: center;
@@ -13,4 +31,10 @@
     cursor: pointer;
     float: right;
 }
-.logout:hover {opacity: 1}
+.add:hover {opacity: 1}
+
+.uploadBtn{
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

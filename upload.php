@@ -64,13 +64,11 @@
 
     <!-- Page Heading -->
     <h1 class="my-4">
-        <small>Videoliste</small>
+        <small>Videoupload</small>
     </h1>
 
     <p>Unten befindet sich die Liste mit allen hochgeladenen Videos. Sie können mit dem Button "Hinzufügen" ein weiteres Video hochladen.</p>
 
-
-    <button class="btn btn-success uploadBtn" onclick="window.location.href='upload.php'">Video hinzufügen</button>
 
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -103,6 +101,8 @@
         </tbody>
     </table>
 
+    <button class="btn uploadBtn btn-light" onclick="window.location.href='videolist.php'">Abbrechen</button>
+    <button class="btn uploadBtn btn-success">Speichern</button>
 
 </div>
 <!-- /.container -->

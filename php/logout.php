@@ -12,3 +12,4 @@ session_destroy();
 
 //redirect
 header("Location: ../login/login.php");
+die();
