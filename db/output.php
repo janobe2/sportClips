@@ -12,7 +12,8 @@ while ($dsatz = $res->fetchArray(SQLITE3_ASSOC)) {
     echo $dsatz['name'] . "\n";
     echo $dsatz['loginName'] . "\n";
     echo $dsatz['email'] . "\n";
-    echo $dsatz['password'];
+    echo $dsatz['password'] . "\n";
+    echo $dsatz['rights'] . "\n" . "\n";
 }
 
 

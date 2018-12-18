@@ -1,0 +1,33 @@
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.knopf {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.knopf:hover{
+    color: white;
+    background-color: gray;
+    -webkit-transition: 2s time;
+    -moz-transition: 2s time;
+    -ms-transition: 2s time;
+    -o-transition: 2s time;
+    transition: 2s time;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
