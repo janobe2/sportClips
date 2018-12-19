@@ -77,18 +77,46 @@
 
 
     <div class="upload-btn-wrapper">
-        <button class="knopf">Upload a file</button>
-        <input type="file" multiple name="myfile[]" accept="video/mp4,video/x-m4v,video/*"/>
+        <button class="knopf">Videos auswählen</button>
+        <input type="file" multiple name="myfile[]" id="filesUpload" accept="video/mp4,video/x-m4v,video/*"
+               onchange="refreshTable()"/>
     </div>
+
+    <div class="upload-btn-wrapper">
+        <button class="knopf" id="removeList" onclick="removeList();" disabled="disabled">Liste löschen</button>
+    </div>
+
+
     <br><br>
-    <p>Klicken Sie auf "Speichern" und der Upload wird beginnen.</p>
-    <progress id="progressBar" value="0" max="100" style="width:50%; float: left"></progress>
-    <h3 id="status"></h3>
-    <p id="loaded_n_total"></p>œ
-    <br>
+
+    <table class="table table-striped" id="filesTable">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Grösse</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="noFiles">
+            <th colspan="2" style="text-align: center">Es wurde noch kein Videos ausgewählt. Bitte klicken Sie oben auf
+                den Knopf "Videos auswählen".
+            </th>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="extraText" style="display: none">
+        <br>
+        <br>
+        <p>Klicken Sie auf "Speichern" und der Upload wird beginnen.</p>
+        <progress id="progressBar" value="0" max="100" style="width:50%; float: left"></progress>
+        <h3 id="status"></h3>
+        <p id="loaded_n_total"></p>
+        <br>
+    </div>
 
     <button class="btn uploadBtn btn-light" onclick="window.location.href='videolist.php'">Abbrechen</button>
-    <button class="btn uploadBtn btn-success">Speichern</button>
+    <button class="btn uploadBtn btn-success" id="btnSave" disabled="disabled">Speichern</button>
 
 </div>
 <!-- /.container -->

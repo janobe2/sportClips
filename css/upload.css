@@ -14,7 +14,12 @@
     font-weight: bold;
 }
 
-.knopf:hover{
+.knopf:disabled{
+    opacity: 0.5;
+}
+
+
+.knopf:enabled:hover{
     color: white;
     background-color: gray;
     -webkit-transition: 2s time;
