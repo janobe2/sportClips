@@ -6,13 +6,12 @@
  * Time: 12:05
  */
 
-/* Datenbankdatei ausserhalb htdocs öffnen bzw. erzeugen */
 $db = new SQLite3("clipDatabase.db");
 
 
 /* Tabelle mit Primärschlüssel erzeugen */
 $db->exec("CREATE TABLE IF NOT EXISTS TUser (id INTEGER PRIMARY KEY AUTOINCREMENT, name, loginName,email, password, rights)");
-$db->exec("CREATE TABLE IF NOT EXISTS TVideos (id INTEGER PRIMARY KEY AUTOINCREMENT , UsId, path, text)");
+$db->exec("CREATE TABLE IF NOT EXISTS TVideos (id INTEGER PRIMARY KEY AUTOINCREMENT, UsName, path, title, size)");
 
 
 /* Datensätze eintragen */

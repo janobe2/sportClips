@@ -6,6 +6,7 @@
 
 body {
   padding-top: 54px;
+  overflow: scroll;
 }
 
 @media (min-width: 992px) {
@@ -20,13 +21,4 @@ body {
 
 .pagination {
   margin-bottom: 30px;
-}
-
-
-footer{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: #1b1e21;
 }

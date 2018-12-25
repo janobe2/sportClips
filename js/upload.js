@@ -1,39 +1,68 @@
 //Variables initialisation
 const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 const errorRow = document.getElementById('noFiles');
-const btnRemoveList = document.getElementById('removeList');
+const btnRemoveList = document.getElementById('removeAll');
 const extraText = document.getElementById('extraText');
 const table = document.getElementById('filesTable').getElementsByTagName('tbody')[0];
 const btnSave = document.getElementById('btnSave');
+const filesInput = document.getElementById('filesUpload');
+const form = document.getElementById('uploadForm');
+const process = document.getElementById('progressBar');
+const successT = document.getElementById('successT');
+const errorT = document.getElementById('errorT');
+const btnAbort = document.getElementById('btnAbort');
+var xhr = new XMLHttpRequest();
+var abortPossible = false;
 
-function upload() {
-    //var videos = document.getElementById();
-}
+//Upload
+form.onsubmit = function(event) {
+    event.preventDefault();
+    btnSave.disabled = true;
+    process.disabled = false;
+    //Change button abort
+    btnAbort.innerHTML = 'Abbrechen';
+    abortPossible = true;
 
+    var videos = filesInput.files;
+    var fd = new FormData();
 
-/*
-* <tr>
-            <th scope="row">1</th>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>@twitter</td>
-        </tr>
-*
-*
-* */
+    for (var i = 0; i < videos.length; i++) {
+        fd.append("files[" + i + "]", videos[i]);
+    }
+
+    xhr.open('POST', '/sportClips/php/videoUpload.php', true);
+
+    xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable) {
+            var percentComplete = (e.loaded / e.total) * 100;
+            process.value = percentComplete;
+        }
+    };
+    xhr.onload = function () {
+        if (this.status == 200) {
+
+            //Reset everything
+            process.disabled = true;
+            process.value = 0;
+            btnSave.disabled = false;
+            removeList();
+            btnAbort.innerHTML = 'Fertig';
+            abortPossible = false;
+            //Show message
+            successT.innerHTML = this.responseText;
+        }
+    };
+    xhr.send(fd);
+};
 
 function refreshTable() {
-    var filesInput = document.getElementById('filesUpload');
-
 
     //Remove info
-    if(filesInput.files.length > 0) {
+    if (filesInput.files.length > 0) {
+
+        //clear list
+        removeList();
+
         //"es wurde kein Video ausgewählt" row will be deleted
         errorRow.style.display = 'none';
 
@@ -72,19 +101,19 @@ function refreshTable() {
 }
 
 
-function calculateSize(x){
+function calculateSize(x) {
 
     let l = 0, n = parseInt(x, 10) || 0;
-    while(n >= 1024 && ++l)
-        n = n/1024;
+    while (n >= 1024 && ++l)
+        n = n / 1024;
 
     //include a decimal point and a tenths-place digit if presenting
     //less than ten of KB or greater units
-    return(n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
+    return (n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
 }
 
 
-function removeList(){
+function removeList() {
     //Remove all rows
     var tableHeaderRowCount = 2;
     var table = document.getElementById('filesTable');
@@ -105,4 +134,23 @@ function removeList(){
     //disable save button
     btnSave.disabled = true;
 
+    //Remove success message
+    successT.innerHTML = '';
+
+}
+
+function abort(){
+    if(abortPossible){
+
+        //Abort uploading
+        xhr.abort();
+        abortPossible = false;
+        btnAbort.innerHTML = 'Fertig';
+        errorT.innerHTML = 'Hochladen wurde abgebrochen';
+
+        //Reset page
+        removeList();
+    }else{
+        window.location.href = '/sportClips/videolist.php';
+    }
 }

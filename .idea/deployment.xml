@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="Mamp Server">
+    <serverData>
+      <paths name="Mamp Server">
+        <serverdata>
+          <mappings>
+            <mapping deploy="sportClips" local="$PROJECT_DIR$" web="/sportClips/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

@@ -67,57 +67,82 @@
         <small>Videoliste</small>
     </h1>
 
-    <p>Unten befindet sich die Liste mit allen hochgeladenen Videos. Sie können mit dem Button "Hinzufügen" ein weiteres Video hochladen.</p>
+    <p>Hier ist die Liste mit den hochgeladenen Videos. Sie können mit dem Button "Hinzufügen" ein weiteres
+        Video hochladen oder eines links auswählen und dann unten auf "Löschen" klicken.</p>
+
+    <form action="php/deleteVideos.php" method="post">
+        <button type="button" class="btn btn-success uploadBtn" onclick="window.location.href='upload.php'">Video
+            hinzufügen
+        </button>
+        <button type="submit" class="btn btn-danger deleteBtn">Ausgewählte Videos löschen</button>
+
+        <?php
+        if (isset($_SESSION["deleteCounter"])) {
+            if ($_SESSION["deleteCounter"] == 1)
+                echo "<p style='color: green; font-weight: bold;'>Es wurde " . $_SESSION["deleteCounter"] . " Video gelöscht</p>";
+            else
+                echo "<p style='color: green; font-weight: bold;'>Es wurden " . $_SESSION["deleteCounter"] . " Videos gelöscht</p>";
+
+            unset($_SESSION["deleteCounter"]);
+        }
+
+        ?>
+
+        <div class="table_outer">
+            <table class="table table-striped" id="list">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"><button type="button" class="checkAll" onclick="checkAll()">Auswählen</button></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Von welchem Benutzer</th>
+                    <th scope="col">Grösse (MB)</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                //Creating list of videos
+                $db = new SQLite3("db/clipDatabase.db");
+                $oneCreated = false;
+
+                //If admin show every video
+                //If user, show only videos, who user uploaded
+                if ($_SESSION['rights'] == 'ADMIN')
+                    $res = $db->query("SELECT * FROM TVideos");
+                else
+                    $res = $db->query("SELECT * FROM TVideos where UsName='" . $_SESSION["username"] . "';");
+
+                while ($dsatz = $res->fetchArray(SQLITE3_ASSOC)) {
+                    echo "<tr>";
+                    echo "<th scope='row'><input id='checks' type='checkbox' name='" . $dsatz['id'] . "'/></th>";
+                    echo "<td class='dsc'>" . $dsatz['title'] . "</td>";
+                    echo "<td>" . $dsatz['UsName'] . "</td>";
+                    echo "<td>" . $dsatz['size'] . "</td>";
+                    echo "</tr>";
+
+                    $oneCreated = true;
+                }
+                //add line when there is no data
+                if (!$oneCreated) {
+                    echo "<tr>";
+                    echo "<th colspan='4' style='text-align: center'>Es gibt noch keine Videos</th>";
+                    echo "</tr>";
+                }
 
 
-    <button class="btn btn-success uploadBtn" onclick="window.location.href='upload.php'">Video hinzufügen</button>
+                ?>
 
-    <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Von welchem Benutzer</th>
-            <th scope="col">Grösse</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
-
-
+                </tbody>
+            </table>
+        </div>
+    </form>
 </div>
-<!-- /.container -->
 
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy;Jan Oberhänsli www.sportclips.ch 2018</p>
-    </div>
-    <!-- /.container -->
-</footer>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/checkAll.js"></script>
 
 </body>
 
