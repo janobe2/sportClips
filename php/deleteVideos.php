@@ -15,7 +15,7 @@ $res = $db->query("SELECT * FROM TVideos");
 while ($dsatz = $res->fetchArray(SQLITE3_ASSOC)) {
     if(isset($_POST[$dsatz['id']])){
         $counter++;
-        $filePath = $db->querySingle("SELECT path FROM TVideos WHERE id=". $dsatz['id']);
+        $filePath = $db->querySingle("SELECT deletePath FROM TVideos WHERE id=". $dsatz['id']);
         //Remove database entry
         $db->query("DELETE FROM TVideos WHERE id=". $dsatz['id']);
         //Remove file

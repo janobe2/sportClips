@@ -7,6 +7,7 @@
  */
 
 $db = new SQLite3("clipDatabase.db");
+
 $res = $db->query("SELECT * FROM TVideos");
 while ($dsatz = $res->fetchArray(SQLITE3_ASSOC)) {
     /*echo $dsatz['name'] . "\n";
@@ -17,6 +18,7 @@ while ($dsatz = $res->fetchArray(SQLITE3_ASSOC)) {
 
     echo $dsatz['id'] . "\n";
     echo $dsatz['path'] . "\n";
+    echo $dsatz['deletePath'] . "\n";
     echo $dsatz['UsName'] . "\n";
     echo $dsatz['title'] . "\n";
     echo $dsatz['size'] . "\n";

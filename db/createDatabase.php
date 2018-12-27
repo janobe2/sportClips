@@ -11,7 +11,7 @@ $db = new SQLite3("clipDatabase.db");
 
 /* Tabelle mit Primärschlüssel erzeugen */
 $db->exec("CREATE TABLE IF NOT EXISTS TUser (id INTEGER PRIMARY KEY AUTOINCREMENT, name, loginName,email, password, rights)");
-$db->exec("CREATE TABLE IF NOT EXISTS TVideos (id INTEGER PRIMARY KEY AUTOINCREMENT, UsName, path, title, size)");
+$db->exec("CREATE TABLE IF NOT EXISTS TVideos (id INTEGER PRIMARY KEY AUTOINCREMENT, UsName, path, deletePath ,title, size, tags)");
 
 
 /* Datensätze eintragen */

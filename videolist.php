@@ -29,7 +29,7 @@
         $isNotGuest = ($_SESSION["rights"] != "GUEST");
 
         if (isset($_SESSION["username"]) && $isNotGuest)
-            echo '<a class="navbar-brand" href="account.php">' . $_SESSION["username"] . '</a>';
+            echo '<a class="navbar-brand" style="color: white;">' . $_SESSION["username"] . '</a>';
         else {
             header("Location: login/login.php");
             die();
@@ -49,9 +49,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="">Videoliste
                         <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="account.php">Account</a>
                 </li>
             </ul>
         </div>
@@ -79,9 +76,9 @@
         <?php
         if (isset($_SESSION["deleteCounter"])) {
             if ($_SESSION["deleteCounter"] == 1)
-                echo "<p style='color: green; font-weight: bold;'>Es wurde " . $_SESSION["deleteCounter"] . " Video gelöscht</p>";
+                echo "<p style='color: red; font-weight: bold;'>Es wurde " . $_SESSION["deleteCounter"] . " Video gelöscht</p>";
             else
-                echo "<p style='color: green; font-weight: bold;'>Es wurden " . $_SESSION["deleteCounter"] . " Videos gelöscht</p>";
+                echo "<p style='color: red; font-weight: bold;'>Es wurden " . $_SESSION["deleteCounter"] . " Videos gelöscht</p>";
 
             unset($_SESSION["deleteCounter"]);
         }

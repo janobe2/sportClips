@@ -45,7 +45,7 @@
     margin-bottom: 10px;
 }
 
-.deleteBtn{
+.deleteBtn {
     float: right;
     border-radius: 4px;
     margin-right: 10px;
@@ -60,13 +60,45 @@
     max-width: 60%;
 }
 
-.checkAll{
+.checkAll {
     border-radius: 4px;
     border: 1px gray;
     background-color: darkslategrey;
     color: white;
 }
 
-.checkAll:hover{
+.checkAll:hover {
     background-color: gray;
+}
+
+.pb-video-container {
+    padding-top: 20px;
+    background: #bdc3c7;
+    font-family: Lato;
+}
+
+.pb-row {
+    margin-bottom: 10px;
+}
+
+.tagLabel {
+    margin-right: 0.5%;
+    margin-bottom: 0.5%;
+    color: white;
+    background-color: dodgerblue;
+    padding: 2px 4px;
+    border-radius: 3px;
+    border: 1px solid #01649e;
+    display: inline-block;
+}
+
+.vjs-tech {
+    object-fit: cover;
+}
+.title {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }

@@ -1,9 +1,7 @@
 //Variables initialisation
 const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-const errorRow = document.getElementById('noFiles');
 const btnRemoveList = document.getElementById('removeAll');
 const extraText = document.getElementById('extraText');
-const table = document.getElementById('filesTable').getElementsByTagName('tbody')[0];
 const btnSave = document.getElementById('btnSave');
 const filesInput = document.getElementById('filesUpload');
 const form = document.getElementById('uploadForm');
@@ -11,11 +9,12 @@ const process = document.getElementById('progressBar');
 const successT = document.getElementById('successT');
 const errorT = document.getElementById('errorT');
 const btnAbort = document.getElementById('btnAbort');
+const videoPath = document.getElementById('videoPath');
 var xhr = new XMLHttpRequest();
 var abortPossible = false;
 
 //Upload
-form.onsubmit = function(event) {
+form.onsubmit = function (event) {
     event.preventDefault();
     btnSave.disabled = true;
     process.disabled = false;
@@ -25,11 +24,9 @@ form.onsubmit = function(event) {
 
     var videos = filesInput.files;
     var fd = new FormData();
-
-    for (var i = 0; i < videos.length; i++) {
-        fd.append("files[" + i + "]", videos[i]);
-    }
-
+    var tags = $('#videotags').tagsinput('items');
+    fd.append("files[0]", videos[0]);
+    fd.append('tags', tags);
     xhr.open('POST', '/sportClips/php/videoUpload.php', true);
 
     xhr.upload.onprogress = function (e) {
@@ -57,73 +54,28 @@ form.onsubmit = function(event) {
 
 function refreshTable() {
 
-    //Remove info
-    if (filesInput.files.length > 0) {
-
-        //clear list
-        removeList();
-
-        //"es wurde kein Video ausgewählt" row will be deleted
-        errorRow.style.display = 'none';
-
-        //enable remove every row in table button
-        btnRemoveList.disabled = false;
-
-        //show extra info text
-        extraText.style.display = 'block';
-
-        //Enable save button
-        btnSave.disabled = false;
+    var fullPath = filesInput.value;
+    if (fullPath) {
+        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+        var filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(1);
+        }
+        videoPath.value = filename;
     }
 
-    //Add information rows
-    for (var i = 0; i < filesInput.files.length; i++) {
+    //enable remove every row in table button
+    btnRemoveList.disabled = false;
 
-        //Create row
-        var row = table.insertRow(table.rows.length);
+    //show extra info text
+    extraText.style.display = 'block';
 
-        //in each row create two cells
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-
-        //calcualte size into correct format
-        var size = calculateSize(filesInput.files[i].size);
-
-        //for every cell create one node
-        var text1 = document.createTextNode(filesInput.files[i].name);
-        var text2 = document.createTextNode(String(size));
-
-        cell1.appendChild(text1);
-        cell2.appendChild(text2);
-
-    }
-
-}
-
-
-function calculateSize(x) {
-
-    let l = 0, n = parseInt(x, 10) || 0;
-    while (n >= 1024 && ++l)
-        n = n / 1024;
-
-    //include a decimal point and a tenths-place digit if presenting
-    //less than ten of KB or greater units
-    return (n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
+    //Enable save button
+    btnSave.disabled = false;
 }
 
 
 function removeList() {
-    //Remove all rows
-    var tableHeaderRowCount = 2;
-    var table = document.getElementById('filesTable');
-    var rowCount = table.rows.length;
-    for (var i = tableHeaderRowCount; i < rowCount; i++) {
-        table.deleteRow(tableHeaderRowCount);
-    }
-
-    //show "es wurde kein Video ausgewählt" row
-    errorRow.style.display = '';
 
     //enable remove every row in table button
     btnRemoveList.disabled = true;
@@ -136,11 +88,15 @@ function removeList() {
 
     //Remove success message
     successT.innerHTML = '';
+    errorT.innerHTML = '';
 
+    //reset form
+    form.reset();
+    $("#videotags").tagsinput('removeAll');
 }
 
-function abort(){
-    if(abortPossible){
+function abort() {
+    if (abortPossible) {
 
         //Abort uploading
         xhr.abort();
@@ -150,7 +106,7 @@ function abort(){
 
         //Reset page
         removeList();
-    }else{
+    } else {
         window.location.href = '/sportClips/videolist.php';
     }
 }
