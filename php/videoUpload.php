@@ -10,7 +10,7 @@ $errors = 0;
 session_start();
 $sessionName = $_SESSION['username'];
 
-
+$ini = parse_ini_file("../db/preferences.ini");
 
 if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
 
@@ -32,7 +32,7 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
     } else {
 
         //Make a database entry
-        $dir = "/sportClips/clips/";
+        $dir =  $ini["path"] . "clips/";
         $db = new SQLite3("../db/clipDatabase.db");
         $random = "";
 

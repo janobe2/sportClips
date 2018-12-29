@@ -26,6 +26,7 @@
         <?php
 
         session_start();
+
         $isNotGuest = ($_SESSION["rights"] != "GUEST");
 
         if (isset($_SESSION["username"]) && $isNotGuest)

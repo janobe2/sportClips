@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="https://cdn.plyr.io/3.4.7/plyr.css">
     <link rel="stylesheet" href="css/search.css">
 
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        //initialize variable
+        var content = [];
+        var count = 0;
+    </script>
 
 </head>
 
@@ -28,7 +35,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <?php
-        
+
         session_start();
 
         if (isset($_SESSION["username"]))
@@ -136,7 +143,11 @@
             echo '</div>';
             echo '</div>';
 
-            echo '<script type="text/javascript">$("div.tagTitle").text(' . $dsatz['tags'] . ');</script>';
+            echo '<script type="text/javascript">
+                    content[count] = "'. $dsatz['tags'] .'";
+                    count++;
+                    
+                  </script>';
 
         }
 
@@ -164,8 +175,6 @@
 
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.plyr.io/3.4.7/plyr.js"></script>
 <script src="js/video.js"></script>
 </body>

@@ -1,5 +1,5 @@
 const divs = document.getElementsByClassName('tagTitle');
-const title = document.getElementsByClassName('tagTitle');
+const title = document.getElementsByClassName('title');
 const searchPref = document.getElementById('searchPreference');
 
 //set up video settings
@@ -23,11 +23,11 @@ function search(input) {
     if (!showAll) {
 
         //get type of search
-        switch (searchPref) {
+        switch (searchPref.value) {
             //Search in tags
             case 'tag':
                 for (i = 0; i < divs.length; i++) {
-                    if (divs[i].textContent.search(input) === -1) {
+                    if (content[i].search(input) === -1) {
                         divs[i].style.display = 'none';
                     }else{
                         divs[i].style.display = 'block';
@@ -47,23 +47,14 @@ function search(input) {
                 //Search in titles and tags
             case 'both':
                 for (i = 0; i < divs.length; i++) {
-                    if (title[i].textContent.search(input) === -1 || divs[i].textContent.search(input) === -1) {
+                    if (title[i].textContent.search(input) === -1 && content[i].search(input) === -1) {
                         divs[i].style.display = 'none';
                     }else{
                         divs[i].style.display = 'block';
                     }
                 }
                 break;
-            //Default setting searches in tags
-            default:
-                for (i = 0; i < divs.length; i++) {
-                    if (divs[i].textContent.search(input) === -1) {
-                        divs[i].style.display = 'none';
-                    }else{
-                        divs[i].style.display = 'block';
-                    }
-                }
-                break;
+
         }
 
 
