@@ -28,7 +28,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <?php
-
+        
         session_start();
 
         if (isset($_SESSION["username"]))
@@ -72,7 +72,13 @@
     <!-- Page Heading -->
     <h1 class="my-4">Videos
     </h1>
+
     <div class="col-12">
+        <select id="searchPreference">
+            <option value="title">Titelsuche</option>
+            <option selected value="tag">Tagsuche</option>
+            <option value="both">Suche in Titel und Tags</option>
+        </select>
         <div id="custom-search-input">
             <div class="input-group">
                 <input type="text" class="search-query form-control" onkeyup="search(this.value)" placeholder="Video suche"/>

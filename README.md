@@ -20,3 +20,7 @@ post_max_size = 0
 
 
 https://www.jetbrains.com/help/youtrack/standalone/2017.2/Reverse-Proxy-Configuration.html#Nginx_Config
+
+
+
+open start.html if not using an IDE
