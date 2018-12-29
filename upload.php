@@ -33,6 +33,10 @@
     <div class="container">
         <?php
 
+        //check if db exists
+        if(!file_exists("db/clipsDatabase.php"))
+            header("Location: db/createDatabase.php");
+
         session_start();
 
         if (isset($_SESSION["username"]))
