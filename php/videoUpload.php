@@ -9,9 +9,8 @@
 $errors = 0;
 session_start();
 $sessionName = $_SESSION['username'];
-$dir =  $ini["path"] . "clips/";
-
 $ini = parse_ini_file("../db/preferences.ini");
+$dir =  $ini["path"] . "clips/";
 
 if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
 
