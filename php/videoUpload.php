@@ -9,6 +9,7 @@
 $errors = 0;
 session_start();
 $sessionName = $_SESSION['username'];
+$dir =  $ini["path"] . "clips/";
 
 $ini = parse_ini_file("../db/preferences.ini");
 
@@ -26,13 +27,12 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
     }
 
     //Move files to destination
-    if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/' . $fName)) {
+    if (!move_uploaded_file($_FILES['files']['tmp_name'][0], $dir . 'clips/' . $fName)) {
         echo "Es ist was schief gelaufen";
         die();
     } else {
 
         //Make a database entry
-        $dir =  $ini["path"] . "clips/";
         $db = new SQLite3("../db/clipDatabase.db");
         $random = "";
 
