@@ -46,8 +46,8 @@
                 session_start();
 
                 //check if db exists
-                if(!file_exists("db/clipsDatabase.db"))
-                    header("Location: db/createDatabase.php");
+                if(!file_exists("../db/clipsDatabase.db"))
+                    header("Location: ../db/createDatabase.php");
 
                 if (isset($_SESSION["errorMessage"])) {
                     echo "<p id='loginError' class='error'>" . $_SESSION["errorMessage"] . "</p>";
