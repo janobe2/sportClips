@@ -27,7 +27,7 @@ form.onsubmit = function (event) {
     var tags = $('#videotags').tagsinput('items');
     fd.append("files[0]", videos[0]);
     fd.append('tags', tags);
-    xhr.open('POST', '/sportClips/php/videoUpload.php', true);
+    xhr.open('POST', '/sportClips-master/php/videoUpload.php', true);
 
     xhr.upload.onprogress = function (e) {
         if (e.lengthComputable) {
@@ -107,6 +107,6 @@ function abort() {
         //Reset page
         removeList();
     } else {
-        window.location.href = '/sportClips/videolist.php';
+        window.location.href = '/sportClips-master/videolist.php';
     }
 }
