@@ -101,7 +101,7 @@
         </div>
         <br><br>
         <div class="tags">
-            <label>Videopfad</label>
+            <label>Videoname</label>
             <input type="text" id="videoPath" disabled>
 
             <label>Fügen Sie dem Video Tags hinzug. Wenn Sie einen Tag angegeben haben, drücken Sie die Eingabetaste und
