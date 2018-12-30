@@ -22,4 +22,12 @@ if(!file_exists("clipDatabase.db")) {
     $db->close();
 }
 
+$ini = parse_ini_file("preferences.ini");
+$maxSize = 1000; //Max file size uplaod
+
+ini_set("file_uploads", "On");
+ini_set("post_max_size", $ini["post_size"]."M");
+ini_set("upload_max_filesize", $ini["upload_size"]."M");
+ini_set("max_file_uploads", $ini["max_files_at_once"]);
+
 header("Location: ../index.php");

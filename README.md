@@ -4,7 +4,7 @@ Ein Projekt im Auftrag von der Kantonsschule Frauenfeld, in dem man Videos hochl
 
 ## Installation
 
-Bevor die Webseite genutzt werden kann, müssen noch einige Einstellungen angepasst werden.
+Bevor die Webseite genutzt werden kann, muss noch was angepasst werden.
 
 ### Server
 
@@ -16,25 +16,15 @@ Dieser kann kostenlos von folgender Webseite runtergeladen werden.
 
 ### Servereinstellungen
 
-Nach der Installation des Xampp-Servers müssen noch ein paar Einstellungen abgeändert werden. Dazu öffnen Sie die **php.ini** Datei. Diese befindet sich in folgendem Ordner.
+Nach der Installation des Xampp-Servers muss noch eine Einstellung abgeändert werden. Dazu öffnen Sie die **php.ini** Datei. Diese befindet sich in folgendem Ordner:
 
 ```
 /Pfad/zu/xampp/php/php.ini
 ```
 
 Diese Datei kann mit jedem beliebigen Editor geöffnet und bearbeitet werden.
-Nehmen Sie folgende Änderungen vor:
+Nehmen Sie folgende Änderung vor:
 
-```
-file_uploads = On
-```
-Diese Grösse bestimmt, wie gross die Videodateien sein dürfen, die hochgeladen werden.
-```
-upload_max_filesize = 900M
-```
-```
-post_max_size = 0
-```
 Entfernen Sie **;** von folgender Einstellung:
 ```
 ;extension=sqlite3
@@ -69,7 +59,13 @@ Muss dann so in der preferences.ini Datei aussehen:
 ```
 [path]
 path = "/sportVideos/"
+
+[php]
+upload_size = 1000
+max_files_at_once = 20
+post_size = 1500
 ```
+Bei nicht Änderung des Ordnernamens, müssen Sie hier keine Einstellungen ändern.
 
 ### Sie sind bereit!
 
