@@ -10,8 +10,6 @@ $errors = 0;
 session_start();
 $sessionName = $_SESSION['username'];
 
-$ini = parse_ini_file("../db/preferences.ini");
-
 //check os for right path
 $dir = "../clips/";
 
@@ -42,7 +40,8 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
 
     $db = new SQLite3("../db/clipDatabase.db");
     $random = "";
-    $dir = $ini["path"] . "clips/";
+    $ini = parse_ini_file("../db/preferences.ini");
+    $dir = $ini["rootPath"] . "clips/";
 
     //Rename file
     $random = generateRandomString();
