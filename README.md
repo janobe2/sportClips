@@ -94,4 +94,9 @@ localhost/NameIhresVerzeichnissesInXampp/
 Danach sollten Sie auf der Login - Seite landen.
 Sie können anfangen die Seite zu benutzen.
 
+Es gibt beim erstellen der Seite nur einen Account, und zwar den Admin Account.
+```
+Benutzername:   admin
+Passwort:       admin
+```
 Viel Spass!
