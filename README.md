@@ -24,3 +24,5 @@ https://www.jetbrains.com/help/youtrack/standalone/2017.2/Reverse-Proxy-Configur
 
 
 open start.html if not using an IDE
+
+sqlite3 aktivieren bei php.ini
