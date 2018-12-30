@@ -1,0 +1,1 @@
+This file just exists so that the folder 'clips' will be uploaded to github :)
