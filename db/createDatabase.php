@@ -22,5 +22,4 @@ if(!file_exists("clipDatabase.db")) {
     $db->close();
 }
 
-//redirecting to index.php
 header("Location: ../index.php");

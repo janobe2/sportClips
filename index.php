@@ -37,8 +37,10 @@
         <?php
 
         //check if db exists
-        if(!file_exists("db/clipsDatabase.db"))
+        if(!file_exists("db/clipDatabase.db")) {
             header("Location: db/createDatabase.php");
+        }
+
 
         session_start();
 
