@@ -22,20 +22,18 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
     $path_inf = pathinfo($_FILES['files']['name'][0]);
     $extension = $path_inf["extension"];
 
+    //Check if the file has correct format
     if (($extension !== "mp4") && ($extension !== "ogg") && ($extension !== "webm") && ($extension !== "mov") && ($extension !== "avi")) {
         echo "Dieses Video wird nicht unterstützt.";
         die();
     }
 
-    //rename before moving, so no errors occur
     //Move files to destination
-    if (!rename($_FILES['files']['tmp_name'][0], '../clips/newVideo.'. $extension)) {
+    if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/' . $fName)) {
         echo "Es ist etwas schief gelaufen";
         die();
     }
 
-    //rename back to normal
-    rename("../clips/newVideo.". $extension, "../clips/" . $fName);
 
     //Make a database entry
     $db = new SQLite3("../db/clipDatabase.db");
