@@ -36,8 +36,7 @@ extension=sqlite3
 
 ### Einbindung der Webseite
 
-Laden Sie die Webseite herunter und entpacken Sie den Ordner.
-Verschieben Sie den heruntergeladenen Ordner in folgendes Verzeichnis:
+Laden Sie die Webseite herunter und entpacken Sie den Ordner. Öffnen Sie den entpackten Ordner und verschieben Sie den sich darin befindeten Ordner in folgendes Verzeichnis:
 
 ```
 /Pfad/zu/xampp/htdocs/
