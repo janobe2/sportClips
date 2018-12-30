@@ -27,17 +27,21 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
         die();
     }
 
+    //rename before moving, so no errors occur
     //Move files to destination
-    if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/' . $fName)) {
+    if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/newVideo'. $extension)) {
         echo "Es ist etwas schief gelaufen";
         die();
     }
 
+    //rename back to normal
+    rename("../clips/newVideo". $extension, "../clips/" . $fName);
+
     //Make a database entry
     $db = new SQLite3("../db/clipDatabase.db");
     $random = "";
-    $dir = $ini["rootPath"] . "clips/";
     $ini = parse_ini_file("../db/preferences.ini");
+    $dir = $ini["rootPath"] . "clips/";
 
     //Rename file
     $random = generateRandomString();
