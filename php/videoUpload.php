@@ -12,6 +12,14 @@ $sessionName = $_SESSION['username'];
 
 $ini = parse_ini_file("../db/preferences.ini");
 
+//check os for right path
+if (PHP_OS == "WIN32" || PHP_OS == "WINNT") {
+    $dir =  $ini["path"] . "clips/";
+} else {
+    // some other platform
+    $dir = "../clips/";
+}
+
 if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
 
     $fName = $_FILES['files']['name'][0];
@@ -32,9 +40,10 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
     } else {
 
         //Make a database entry
-        $dir =  $ini["path"] . "clips/";
+
         $db = new SQLite3("../db/clipDatabase.db");
         $random = "";
+        $dir =  $ini["path"] . "clips/";
 
         //Rename file
         $random = generateRandomString();
