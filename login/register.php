@@ -45,6 +45,10 @@
 
                 <?php
 
+                //check if db exists
+                if(!file_exists("db/clipsDatabase.db"))
+                    header("Location: db/createDatabase.php");
+
                 function receiver($input){
                     if(isset($_SESSION[$input]))
                         return $_SESSION[$input];
