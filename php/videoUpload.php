@@ -13,12 +13,8 @@ $sessionName = $_SESSION['username'];
 $ini = parse_ini_file("../db/preferences.ini");
 
 //check os for right path
-if (PHP_OS == "WIN32" || PHP_OS == "WINNT") {
-    $dir =  $ini["path"] . "clips/";
-} else {
-    // some other platform
-    $dir = "../clips/";
-}
+$dir = "../clips/";
+
 
 if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
 
@@ -28,36 +24,38 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
     $path_inf = pathinfo($_FILES['files']['name'][0]);
     $extension = $path_inf["extension"];
 
-    if (($extension !== "mp4") && ($extension !== "ogg") && ($extension !== "webm") && ($extension !== "mov") && ($extension !== "avi")){
+    if (($extension !== "mp4") && ($extension !== "ogg") && ($extension !== "webm") && ($extension !== "mov") && ($extension !== "avi")) {
         echo "Dieses Video wird nicht unterstützt.";
         die();
     }
 
     //Move files to destination
     if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/' . $fName)) {
-        echo "Es ist etwas schief gelaufen";
-        die();
-    } else {
-
-        //Make a database entry
-
-        $db = new SQLite3("../db/clipDatabase.db");
-        $random = "";
-        $dir =  $ini["path"] . "clips/";
-
-        //Rename file
-        $random = generateRandomString();
-        $path_inf = pathinfo("../clips/". $fName);
-        $extension = $path_inf["extension"];
-        $size = round(filesize("../clips/" . $fName) / 1000000, 2);
-        $fullname = $random . "." . $extension;
-        rename("../clips/" . $fName, "../clips/" . $fullname);
-
-        //Do database entry
-        $db->query('INSERT INTO TVideos (id, UsName, path, deletePath, title, size, tags) VALUES ' . "(null, '" . $sessionName . "', '". $dir . $fullname . "', '../clips/" . $fullname . "', '" . $fName . "', " . $size . ", '". $tags ."')");
-
-
+        $dir = $ini["path"] . "clips/";
+        if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/' . $fName)) {
+            echo "Es ist etwas schief gelaufen";
+            die();
+        }
     }
+
+    //Make a database entry
+
+    $db = new SQLite3("../db/clipDatabase.db");
+    $random = "";
+    $dir = $ini["path"] . "clips/";
+
+    //Rename file
+    $random = generateRandomString();
+    $path_inf = pathinfo("../clips/" . $fName);
+    $extension = $path_inf["extension"];
+    $size = round(filesize("../clips/" . $fName) / 1000000, 2);
+    $fullname = $random . "." . $extension;
+    rename("../clips/" . $fName, "../clips/" . $fullname);
+
+    //Do database entry
+    $db->query('INSERT INTO TVideos (id, UsName, path, deletePath, title, size, tags) VALUES ' . "(null, '" . $sessionName . "', '" . $dir . $fullname . "', '../clips/" . $fullname . "', '" . $fName . "', " . $size . ", '" . $tags . "')");
+
+
 } else {
     echo "Der Videoname ist ungültig.";
     die();
