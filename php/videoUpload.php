@@ -29,7 +29,7 @@ if (isset($_FILES['files']['tmp_name'][0]) && isset($_SESSION['username'])) {
 
     //rename before moving, so no errors occur
     //Move files to destination
-    if (!move_uploaded_file($_FILES['files']['tmp_name'][0], '../clips/newVideo'. $extension)) {
+    if (!rename($_FILES['files']['tmp_name'][0], '../clips/newVideo'. $extension)) {
         echo "Es ist etwas schief gelaufen";
         die();
     }
